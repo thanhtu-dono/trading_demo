@@ -37,26 +37,26 @@ public class TradeTransactionServiceImpl implements TradeTransactionService {
         BigDecimal totalPrice = pricePerUnit(request.getSide(), price).multiply(request.getQuantity());
 
         if ("BUY".equalsIgnoreCase(request.getSide())) {
-            if (wallet.getUsdt().compareTo(totalPrice) < 0)
+            if (wallet.getUsdtBalance().compareTo(totalPrice) < 0)
                 throw new IllegalArgumentException("Not enough USDT");
 
-            wallet.setUsdt(wallet.getUsdt().subtract(totalPrice));
+            wallet.setUsdtBalance(wallet.getUsdtBalance().subtract(totalPrice));
             if (request.getSymbol().equals("BTCUSDT")) {
-                wallet.setBtc(wallet.getBtc().add(request.getQuantity()));
+                wallet.setBtcBalance(wallet.getBtcBalance().add(request.getQuantity()));
             } else {
-                wallet.setEth(wallet.getEth().add(request.getQuantity()));
+                wallet.setEthBalance(wallet.getEthBalance().add(request.getQuantity()));
             }
         } else if ("SELL".equalsIgnoreCase(request.getSide())) {
             if (request.getSymbol().equals("BTCUSDT")) {
-                if (wallet.getBtc().compareTo(request.getQuantity()) < 0)
+                if (wallet.getBtcBalance().compareTo(request.getQuantity()) < 0)
                     throw new IllegalArgumentException("Not enough BTC");
-                wallet.setBtc(wallet.getBtc().subtract(request.getQuantity()));
-                wallet.setUsdt(wallet.getUsdt().add(totalPrice));
+                wallet.setBtcBalance(wallet.getBtcBalance().subtract(request.getQuantity()));
+                wallet.setUsdtBalance(wallet.getUsdtBalance().add(totalPrice));
             } else {
-                if (wallet.getEth().compareTo(request.getQuantity()) < 0)
+                if (wallet.getEthBalance().compareTo(request.getQuantity()) < 0)
                     throw new IllegalArgumentException("Not enough ETH");
-                wallet.setEth(wallet.getEth().subtract(request.getQuantity()));
-                wallet.setUsdt(wallet.getUsdt().add(totalPrice));
+                wallet.setEthBalance(wallet.getEthBalance().subtract(request.getQuantity()));
+                wallet.setUsdtBalance(wallet.getUsdtBalance().add(totalPrice));
             }
         } else {
             throw new IllegalArgumentException("Invalid side");
