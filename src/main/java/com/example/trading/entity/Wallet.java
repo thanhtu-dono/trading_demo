@@ -17,8 +17,9 @@ import java.math.BigDecimal;
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long userId;
-    private BigDecimal usdt;
-    private BigDecimal btc;
-    private BigDecimal eth;
+    private BigDecimal usdtBalance;
+    private BigDecimal btcBalance;
+    private BigDecimal ethBalance;
 }
