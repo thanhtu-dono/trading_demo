@@ -1,4 +1,4 @@
 package com.example.trading.services;
 
-public interface UserWalletService {
+public interface RawPriceService {
 }

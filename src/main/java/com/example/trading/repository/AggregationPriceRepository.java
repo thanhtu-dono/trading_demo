@@ -4,7 +4,9 @@ import com.example.trading.entity.AggregationPrice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface AggregationPriceRepository extends JpaRepository<AggregationPrice, Long> {
-    AggregationPrice findTopBySymbolOrderByCreateDate(String symbol);
+    Optional<AggregationPrice> findTopBySymbolOrderByCreateDate(String symbol);
 }

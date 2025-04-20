@@ -13,3 +13,8 @@ spring:
       hibernate:
         ddl-auto: update
       show-sql: true
+
+api:
+  url:
+    binance: https://api.binance.com/api/v3/ticker/bookTicker
+    houbi: https://api.huobi.pro/market/tickers
